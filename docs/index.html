@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex">
+<title>영화 알리미</title>
+<style>
+/* 숫자 전용 글꼴: Doto (SIL Open Font License 1.1, The Doto Project Authors) 에서 숫자만 잘라 넣음 */
+@font-face{font-family:"Board";font-weight:900;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAALoAA4AAAAAFkQAAAKRAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGhYGYD9TVEFUQABIEQgKpUSodgE2AiQDGgsYAAQgBYEyByAMBxvoFiCeB9m54iTT0097W0JG8PxaOu/vHu5dgFzLDllVEoCrTdIqYMm2ropAmLr4Mjt62xDX6Q13o9OWMo0ioayNmLJg5T9kIcTX+Wo04glG5IJFq8WqAS22gJnt/73rF6X4EytWrCDpeMl7R+9KjF1kdzFiCA8TaACSEOpCnlZnx5RIx9N9nGz6jmcmRKrWU1GvpZRVUwWh+ceU8eOZ5LHxZmQ3/5fJjsVoBMSvdB9DEUJVQpeEkdLSRZkAR3ZZQAi5NoEUBQiB9uwYSMjQJRPokpuMXC4w4z+M/w8hR11JTVUmqSgLuRD/aQUF6MEFatep/QHkIGnXoUWrpkKrVq0aed4uPli1ZnVrs9bYFMf76O0rihN9EX199WKec7N2c6U4Hpneo3lfjtflu+HS/vKbprzv+uxvXsl3obSXo0h4FDL/69PdLOcPb3PLT/YXFORvf/k87U1sKDi+xGUkgcdk+ivuAIcEkwluRjP7BV8y3lyJqx4njPobGyaMdrQ9N4VYPZA15u09us2unC6Fb9fKjsby4Ccp3SuuYVq9KksOS35NgoFDfe3Nc08Q3tuTZMid6D4fvwOnzOdJ78EtENryPoAhNYeRGoIJwt/iE+FYxWfyk060wR44FNhqfEMGKg6YNO4xsIgy+jkAimWTBdcOgn9xmpw/5nFAzV8bOPyaMn/gCg+f8bOBQPD004fTm1pn/66m7B28uFi7Bm8H3Uvp30B8zY6hLIHg9+oorV4hN3HPO904xS8TZVc+Eyhiog5qQLhXthCKvCYMZbJMWgwt2tWNrQQdppehYe77Cy1WIi64ZI6NNUtMF0L9Wct3UeOuPfqgFc81dfTipEwgYmCbvjYg8P+SiRc1eTv+dyM/BQAA) format("woff2")}
+
+:root{
+  --room:#17121C;      /* 암막: 바탕 */
+  --stall:#231B2B;     /* 객석: 올라온 면 */
+  --edge:#3B2E47;      /* 통로 경계선 */
+  --velvet:#56283A;    /* 벨벳: 빈 좌석 */
+  --lamp:#FFB23E;      /* 통로등: 고른 것 */
+  --lamp-ink:#2B1B00;
+  --screen:#EAF1FF;    /* 스크린 빛: 본문 글자 */
+  --dust:#A99DB5;      /* 보조 글자 */
+  --exit:#3FD08F;      /* 비상구: 자리 있음 */
+  --alarm:#FF7A7A;     /* 매진 */
+  --font:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  --bar-h:0px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--room);color:var(--screen);font:15px/1.5 var(--font);-webkit-text-size-adjust:100%;word-break:keep-all;overflow-wrap:anywhere}
+body{min-height:100vh;padding:0 16px calc(var(--bar-h) + 28px + env(safe-area-inset-bottom))}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0;text-align:inherit}
+:focus-visible{outline:2px solid var(--lamp);outline-offset:2px}
+.num{font-family:"Board",var(--font);font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+[hidden]{display:none!important}
+
+/* ── 머리 ── */
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:18px 0 10px}
+.top h1{margin:0;font-size:21px;font-weight:800;letter-spacing:-.02em}
+.asof{font-size:12px;color:var(--dust);white-space:nowrap}
+.asof .num{color:var(--lamp);font-size:15px;margin-left:4px}
+.asof.old .num{color:var(--alarm)}
+.tabs{display:flex;border-bottom:1px solid var(--edge);margin:0 -16px;padding:0 16px;position:sticky;top:0;background:var(--room);z-index:5}
+.tab{flex:1;padding:11px 4px 10px;text-align:center;color:var(--dust);font-weight:600;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--screen);border-bottom-color:var(--lamp)}
+.tab .count{font-family:"Board",var(--font);font-weight:900;color:var(--lamp);margin-left:5px}
+
+/* ── 고르기 ── */
+.label{display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 9px;font-size:13px;font-weight:600;color:var(--dust)}
+.label small{font-weight:400;font-size:12px}
+.strip{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border:1px solid var(--edge);border-radius:999px;white-space:nowrap;color:var(--screen)}
+.chip[aria-pressed="true"]{background:var(--lamp);border-color:var(--lamp);color:var(--lamp-ink);font-weight:700}
+.day{flex:none;width:52px;padding:7px 0 6px;border:1px solid var(--edge);border-radius:10px;text-align:center;position:relative}
+.day .dow{display:block;font-size:12px;color:var(--dust)}
+.day .dow.sat{color:#8FB4FF}.day .dow.sun{color:var(--alarm)}
+.day .num{display:block;font-size:23px;line-height:1.15}
+.day .tag{display:block;font-size:10px;color:var(--dust);height:14px}
+.day[aria-pressed="true"]{border-color:var(--lamp);background:rgba(255,178,62,.1)}
+.day[aria-pressed="true"] .num{color:var(--lamp)}
+.day.has::after,.movie.has .title::after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:var(--lamp)}
+.day.has::after{top:5px;right:5px}
+
+.movies{display:flex;flex-direction:column}
+.movie{display:flex;align-items:center;gap:12px;padding:8px 0 8px 10px;border-left:3px solid transparent;border-bottom:1px solid var(--edge);width:100%}
+.movie:last-child{border-bottom:0}
+.movie[aria-pressed="true"]{border-left-color:var(--lamp);background:linear-gradient(90deg,rgba(255,178,62,.09),transparent 70%)}
+.poster{flex:none;width:38px;height:54px;border-radius:4px;background:var(--stall);object-fit:cover;display:grid;place-items:center;color:var(--dust);font-weight:700;overflow:hidden}
+.movie .title{flex:1;font-weight:600;line-height:1.35;position:relative}
+.movie.has .title::after{position:static;display:inline-block;margin-left:7px;vertical-align:middle}
+.movie .meta{flex:none;font-size:12px;color:var(--dust);padding-right:2px}
+
+.shows{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.show{position:relative;padding:10px 12px 11px;border:1px solid var(--edge);border-radius:12px 12px 4px 4px;background:var(--stall);min-width:0}
+.show .time{font-size:28px;line-height:1.05;display:block}
+.show .end{font-size:11px;color:var(--dust);margin-left:5px;font-family:var(--font);font-weight:400}
+.show .hall{display:block;font-size:12px;color:var(--dust);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.show .left{display:block;font-size:13px;margin-top:2px}
+.show .left .num{font-size:16px}
+.show .left.full{color:var(--alarm);font-weight:700}
+.show .left small{display:block;font-weight:400;font-size:11px;color:var(--dust)}
+.show .left.few{color:var(--lamp)}
+.show[aria-pressed="true"]{border-color:var(--lamp);box-shadow:inset 0 0 0 1px var(--lamp)}
+.show[aria-pressed="true"] .time{color:var(--lamp)}
+.show[aria-pressed="true"]::after{content:"✓";position:absolute;top:8px;right:10px;color:var(--lamp);font-weight:800}
+
+.picked{display:flex;flex-direction:column;gap:6px}
+.pick-row{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 12px;background:var(--stall);border-radius:8px;font-size:13px;line-height:1.4}
+.pick-row b{font-weight:600}
+.pick-row .when{color:var(--dust);display:block}
+.pick-row .when .num{color:var(--screen);font-size:15px}
+.pick-row .x{margin-left:auto;flex:none;width:32px;height:32px;border-radius:50%;color:var(--dust);text-align:center;font-size:18px;line-height:32px}
+
+.cond{background:var(--stall);border-radius:14px;padding:14px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px}
+.row + .row{margin-top:8px}
+.stepper{display:flex;align-items:center;gap:4px}
+.stepper button{width:38px;height:38px;border-radius:50%;border:1px solid var(--edge);text-align:center;font-size:20px;line-height:1}
+.stepper button:disabled{opacity:.35}
+.stepper .num{width:38px;text-align:center;font-size:26px;color:var(--lamp)}
+.switch{position:relative;width:48px;height:28px;border-radius:14px;background:var(--edge);flex:none;transition:background .15s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--screen);transition:transform .15s}
+.switch[aria-checked="true"]{background:var(--lamp)}
+.switch[aria-checked="true"]::after{transform:translateX(20px);background:var(--lamp-ink)}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:14px;border:1px solid var(--edge);border-radius:10px;overflow:hidden}
+.mode{padding:10px 4px;text-align:center;font-weight:600;color:var(--dust);border-left:1px solid var(--edge)}
+.mode:first-child{border-left:0}
+.mode[aria-checked="true"]{background:var(--lamp);color:var(--lamp-ink)}
+.mode:disabled{opacity:.4}
+.hint{margin:10px 2px 0;font-size:13px;color:var(--dust)}
+
+/* ── 상영관 배치도 ── */
+.seatmap{margin-top:16px;padding:18px 0 12px;border-radius:12px;background:radial-gradient(120% 70% at 50% 0,rgba(234,241,255,.13),transparent 62%),#1C1522;overflow:hidden}
+.map-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;padding:0 12px 4px;font-size:12px;color:var(--dust)}
+.map-head .name{flex:1 1 100%}
+.map-head .tools{display:flex;gap:6px;margin-left:auto}
+.tool{padding:6px 11px;border:1px solid var(--edge);border-radius:999px;font-size:12px;color:var(--screen);white-space:nowrap}
+.scroller{overflow:auto;padding:0 12px 4px;-webkit-overflow-scrolling:touch}
+.stage{position:relative;margin:0 auto}
+.beam{height:16px;margin:10px 9% 4px;border-radius:50%/100% 100% 0 0;background:linear-gradient(180deg,var(--screen),rgba(234,241,255,.15));box-shadow:0 14px 34px 4px rgba(234,241,255,.22);animation:beam .7s ease-out both}
+.beam-label{text-align:center;font-size:11px;color:var(--dust);margin-bottom:14px}
+@keyframes beam{from{opacity:0;transform:scaleX(.6)}to{opacity:1;transform:none}}
+.grid{position:relative}
+.seat,.rowname{position:absolute;left:calc(var(--x) * var(--p));top:calc(var(--y) * var(--p))}
+.seat{width:calc(var(--w) * var(--p) - var(--gap));height:calc(var(--p) - var(--gap));border-radius:34% 34% 18% 18%;background:var(--velvet);font-size:10px;line-height:calc(var(--p) - var(--gap));text-align:center;color:rgba(234,241,255,.55);transition:background .16s,box-shadow .16s;overflow:hidden}
+.seat.lit{background:var(--lamp);color:var(--lamp-ink);box-shadow:0 0 calc(var(--p) * .3) rgba(255,178,62,.55);font-weight:700}
+.seat.dis{background:none;border:1px dashed var(--edge);pointer-events:none}
+.rowname{width:var(--p);height:calc(var(--p) - var(--gap));line-height:calc(var(--p) - var(--gap));font-size:min(11px,calc(var(--p) * .78));color:var(--dust);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;padding:12px 12px 0;font-size:12px;color:var(--dust)}
+.legend i{display:inline-block;width:13px;height:12px;border-radius:34% 34% 18% 18%;vertical-align:-1px;margin-right:5px;background:var(--velvet)}
+.legend i.lit{background:var(--lamp)}.legend i.dis{background:none;border:1px dashed var(--edge)}
+.seat-sum{padding:10px 12px 0;font-size:13px}
+.seat-sum .num{color:var(--lamp);font-size:16px}
+
+/* ── 내 감시 / 관심 영화 ── */
+.watch{padding:14px 0;border-bottom:1px solid var(--edge);display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:start}
+.watch h3{margin:0;font-size:15px;font-weight:700;line-height:1.35}
+.watch p{margin:0;font-size:13px;color:var(--dust);grid-column:1}
+.watch p .num{color:var(--screen);font-size:15px}
+.watch .state{font-size:12px;font-weight:700;color:var(--dust)}
+.watch .state.ok{color:var(--exit)}
+.watch .del{grid-column:2;grid-row:1 / span 3;align-self:center;padding:8px 12px;border:1px solid var(--edge);border-radius:999px;font-size:13px}
+.watch.gone h3,.watch.gone p{text-decoration:line-through;opacity:.5}
+.watch.gone .del{border-color:var(--alarm);color:var(--alarm)}
+.watch.wait .state{color:var(--lamp)}
+.note{margin:14px 0 0;font-size:13px;color:var(--dust)}
+.empty{padding:40px 8px;text-align:center;color:var(--dust)}
+.empty b{display:block;color:var(--screen);font-size:16px;margin-bottom:6px}
+.empty .tool{display:inline-block;margin-top:14px;padding:9px 16px;font-size:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag-chip{display:flex;align-items:center;gap:2px;padding:6px 6px 6px 14px;border:1px solid var(--edge);border-radius:999px}
+.tag-chip.fixed{padding-right:14px;color:var(--dust)}
+.tag-chip.new{border-color:var(--lamp);color:var(--lamp)}
+.tag-chip.gone{text-decoration:line-through;opacity:.5}
+.tag-chip button{width:28px;height:28px;border-radius:50%;text-align:center;color:var(--dust);font-size:16px}
+.addrow{display:flex;gap:8px;margin-top:12px}
+.addrow input{flex:1;min-width:0;padding:10px 14px;border:1px solid var(--edge);border-radius:10px;background:var(--stall);font-size:16px}
+.addrow input::placeholder{color:var(--dust)}
+.addrow button{padding:0 16px;border-radius:10px;background:var(--edge);font-weight:700}
+.suggest{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;padding:11px 2px;border-bottom:1px solid var(--edge)}
+.suggest span:last-child{color:var(--lamp);font-weight:700;flex:none}
+
+/* ── 아래 보내기 막대 ── */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--stall);border-top:1px solid var(--edge)}
+.bar .what{flex:1;font-size:13px;color:var(--dust);line-height:1.35}
+.bar .what b{color:var(--screen);display:block;font-size:14px}
+.bar .go{flex:none;padding:12px 20px;border-radius:12px;background:var(--lamp);color:var(--lamp-ink);font-weight:800}
+.toast{position:fixed;left:16px;right:16px;bottom:calc(var(--bar-h) + 16px + env(safe-area-inset-bottom));z-index:20;padding:12px 14px;border-radius:10px;background:var(--screen);color:#1B1422;font-size:14px;font-weight:600}
+.sheet{position:fixed;inset:0;z-index:30;background:rgba(10,7,13,.72);display:flex;align-items:flex-end}
+.sheet > div{width:100%;max-height:92vh;overflow:auto;background:var(--stall);border-radius:18px 18px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom))}
+.sheet h2{margin:0 0 8px;font-size:18px}
+.sheet ol{margin:8px 0 12px;padding-left:20px;color:var(--dust);font-size:14px}
+.sheet textarea{width:100%;height:110px;padding:10px;border:1px solid var(--edge);border-radius:10px;background:var(--room);color:var(--screen);font:12px/1.4 ui-monospace,Menlo,monospace;resize:none}
+.sheet .btns{display:flex;gap:8px;margin-top:12px}
+.sheet .btns button{flex:1;padding:12px;border-radius:12px;text-align:center;font-weight:700;border:1px solid var(--edge)}
+.sheet .btns .go{background:var(--lamp);color:var(--lamp-ink);border-color:var(--lamp)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (min-width:560px){body{max-width:520px;margin:0 auto}.tabs{margin:0;padding:0}.strip{margin:0;padding-left:0;padding-right:0}.bar{left:50%;right:auto;width:520px;transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>영화 알리미</h1>
+  <span class="asof" id="asof"></span>
+</header>
+<nav class="tabs" role="tablist" id="tabs"></nav>
+<main id="main"><div class="empty"><b>시간표를 불러오는 중</b>잠깐만 기다려 주세요.</div></main>
+<div class="bar" id="bar" hidden></div>
+<noscript><p style="padding:24px">이 화면은 자바스크립트가 켜져 있어야 보여요.</p></noscript>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let tg = null, inTg = false;     // 텔레그램 안에서 열렸는지 (아래 맨 끝에서 텔레그램 스크립트를 불러온 뒤 정해짐)
+const WEEK = ['일','월','화','수','목','금','토'];
+const CODE = '#감시';
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('ma:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('ma:' + k, JSON.stringify(v)); } catch (e) {} },
+};
+
+/* 데이터가 있는 곳: 깃허브 저장소의 data 브랜치 (주소에 ?data=... 를 주면 그걸 씀) */
+const DATA = (() => {
+  const q = new URLSearchParams(location.search).get('data');
+  if (q) return q.replace(/\/?$/, '/');
+  const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
+  const repo = location.pathname.split('/').filter(Boolean)[0];
+  return m && repo ? `https://raw.githubusercontent.com/${m[1]}/${repo}/data/` : './data/';
+})();
+
+const S = {
+  tab: 'pick', loading: true, error: null,
+  cat: null, wl: {watches: [], movies: [], fixed: [], max: 20}, layouts: null, disCount: {},
+  shows: [], byId: new Map(),
+  b: null, d: null, m: null,
+  picked: new Map(),            // 고른 회차: id → 회차
+  n: 1, adj: true, mode: 'any',
+  hallKey: null, seats: new Set(), zoom: false,
+  dels: new Set(), mvAdd: [], mvDel: new Set(),
+};
+
+/* ── 날짜·글자 도우미 ── */
+const pad = n => String(n).padStart(2, '0');
+const ymd = dt => `${dt.getFullYear()}${pad(dt.getMonth() + 1)}${pad(dt.getDate())}`;
+const toDate = d => new Date(+d.slice(0, 4), +d.slice(4, 6) - 1, +d.slice(6, 8));
+const TODAY = ymd(new Date());
+const TOMORROW = ymd(new Date(Date.now() + 864e5));
+const dayText = d => `${+d.slice(4, 6)}/${+d.slice(6, 8)}(${WEEK[toDate(d).getDay()]})`;
+const norm = s => String(s || '').replace(/\s+/g, '').toLowerCase();
+const num = v => `<span class="num">${esc(v)}</span>`;
+const hallKeyOf = sh => (sh.hn ? `${sh.b}|${sh.hn}` : '');
+const branchName = no => ((S.cat && S.cat.branches.find(b => b.no === no)) || {}).name || '';
+const movieOf = no => (S.cat && S.cat.movies[no]) || {};
+function seatsText(ids, layout, limit) {
+  const pos = new Map(layout.seats.map(s => [s[0] + s[1], s]));
+  const list = ids.map(id => pos.get(id)).filter(Boolean).sort((a, b) => a[3] - b[3] || a[2] - b[2]);
+  const rows = new Map();
+  for (const s of list.slice(0, limit || 24)) (rows.get(s[0]) || rows.set(s[0], []).get(s[0])).push(s[1]);
+  const extra = list.length - (limit || 24);
+  return [...rows].map(([r, ns]) => `${r}열 ${ns.join('·')}`).join(' / ') + (extra > 0 ? ` 외 ${extra}석` : '');
+}
+
+/* ── '좋은 자리' 구역 (alarm/seats.py 의 zone_ids 와 같은 규칙) ──
+   가운데 절반 폭 + 줄 수의 45%~85% 지점(중간~뒤쪽). 좌석 = [줄, 번호, x, y, 폭, 장애인석] */
+function zoneIds(seats) {
+  const out = new Set();
+  if (!seats.length) return out;
+  const ys = new Map();
+  for (const s of seats) if (!ys.has(s[0]) || s[3] < ys.get(s[0])) ys.set(s[0], s[3]);
+  const rows = [...ys.keys()].sort((a, b) => ys.get(a) - ys.get(b) || (a < b ? -1 : a > b ? 1 : 0));
+  const n = rows.length, halfUp = v => Math.floor(v + 0.5);
+  const good = new Set(n <= 2 ? rows : n <= 4 ? rows.slice(Math.floor((n + 1) / 2))
+    : rows.slice(halfUp((n - 1) * 0.45), halfUp((n - 1) * 0.85) + 1));
+  let x0 = Infinity, x1 = -Infinity;
+  for (const s of seats) { x0 = Math.min(x0, s[2]); x1 = Math.max(x1, s[2] + s[4]); }
+  const center = (x0 + x1) / 2, half = (x1 - x0) / 2;
+  for (const s of seats) if (good.has(s[0]) && !s[5] && Math.abs(s[2] + s[4] / 2 - center) <= half * 0.5 + 1e-9) out.add(s[0] + s[1]);
+  return out;
+}
+window.__zoneIds = zoneIds;   // 테스트에서 파이썬 쪽 규칙과 같은지 맞춰 볼 때 씀
+
+/* ── 불러오기 ── */
+async function getJSON(name) {
+  const r = await fetch(`${DATA}${name}?t=${Math.floor(Date.now() / 60000)}`, {cache: 'no-store'});
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error(`${name} ${r.status}`);
+  return r.json();
+}
+async function load() {
+  S.loading = true; S.error = null; render();
+  try {
+    const [cat, wl, lays] = await Promise.all([getJSON('catalog.json'), getJSON('watchlist.json'), getJSON('layouts.json').catch(() => null)]);
+    S.cat = cat;
+    S.layouts = lays || {};
+    S.disCount = {};
+    for (const k in S.layouts) S.disCount[k] = S.layouts[k].seats.filter(s => s[5]).length;
+    if (wl) S.wl = Object.assign({watches: [], movies: [], fixed: [], max: 20}, wl);
+    S.shows = cat ? cat.shows.map(r => ({id: String(r[0]), b: r[1], d: r[2], m: r[3], t: r[4], e: r[5], hall: r[6], hn: r[7], kind: r[8], rest: r[9], tot: r[10]}))
+      .filter(x => x.d > TODAY || (x.d === TODAY && x.t > `${pad(new Date().getHours())}:${pad(new Date().getMinutes())}`)) : [];
+    S.byId = new Map(S.shows.map(x => [x.id, x]));
+    if (cat && cat.branches.length) {
+      const last = store.get('branch');
+      S.b = (cat.branches.find(b => b.no === last) || cat.branches[0]).no;
+      pickFirstDay();
+    }
+  } catch (e) {
+    S.error = e;
+  }
+  S.loading = false; render();
+}
+
+/* ── 고르기 상태 ── */
+const daysOf = b => [...new Set(S.shows.filter(x => x.b === b).map(x => x.d))].sort();
+function pickFirstDay() {
+  const days = daysOf(S.b);
+  S.d = days.includes(S.d) ? S.d : (days[0] || null);
+  S.m = null;
+}
+const moviesOf = (b, d) => {
+  const m = new Map();
+  for (const x of S.shows) if (x.b === b && x.d === d) m.set(x.m, (m.get(x.m) || 0) + 1);
+  return [...m].map(([no, count]) => ({no, count, name: movieOf(no).n || '제목 없음', poster: movieOf(no).p}))
+    .sort((a, b2) => b2.count - a.count || a.name.localeCompare(b2.name, 'ko'));
+};
+function hallsOfPicked() { return [...new Set([...S.picked.values()].map(hallKeyOf))]; }
+function layoutNow() { return (S.layouts && S.hallKey && S.layouts[S.hallKey]) || null; }
+function syncHall() {
+  const halls = hallsOfPicked();
+  const one = halls.length === 1 && halls[0] ? halls[0] : null;
+  const shown = one || halls.find(h => h && S.layouts && S.layouts[h]) || null;   // 여러 관이면 첫 번째 관을 보여줌
+  if (shown !== S.hallKey) { S.hallKey = shown; S.seats = new Set(); S.zoom = false; }
+  if (S.mode === 'pick' && !(one && layoutNow())) S.mode = 'zone';
+  if (S.mode === 'pick' && !S.seats.size && layoutNow()) S.seats = zoneIds(layoutNow().seats);
+}
+const canPick = () => { const h = hallsOfPicked(); return h.length === 1 && !!h[0] && !!layoutNow(); };
+function litIds() {
+  const lay = layoutNow();
+  if (!lay) return new Set();
+  if (S.mode === 'pick') return S.seats;
+  if (S.mode === 'zone') return zoneIds(lay.seats);
+  return new Set(lay.seats.filter(s => !s[5]).map(s => s[0] + s[1]));
+}
+
+/* ── 그리기 ── */
+function render() {
+  const keep = {};
+  $$('[data-keep]').forEach(el => { keep[el.dataset.keep] = [el.scrollLeft, el.scrollTop]; });
+  renderTop();
+  const main = $('#main');
+  if (S.loading) main.innerHTML = '<div class="empty"><b>시간표를 불러오는 중</b>잠깐만 기다려 주세요.</div>';
+  else if (S.error) main.innerHTML = `<div class="empty"><b>시간표를 불러오지 못했어요</b>인터넷 연결을 확인하고 다시 시도해 주세요.<br><button class="tool" data-act="reload">다시 불러오기</button></div>`;
+  else if (!S.cat) main.innerHTML = `<div class="empty"><b>아직 받아 온 시간표가 없어요</b>알리미가 처음 한 번 돌고 나면(5~10분쯤) 여기에 영화관이 나와요.<br><button class="tool" data-act="reload">다시 불러오기</button></div>`;
+  else main.innerHTML = S.tab === 'pick' ? viewPick() : S.tab === 'mine' ? viewMine() : viewMovies();
+  $$('[data-keep]').forEach(el => { const k = keep[el.dataset.keep]; if (k) { el.scrollLeft = k[0]; el.scrollTop = k[1]; } });
+  renderBar();
+  fitHall();
+}
+function renderTop() {
+  const el = $('#asof');
+  if (S.cat && S.cat.updated) {
+    const t = new Date(S.cat.updated), old = Date.now() - t > 90 * 60000;
+    const same = ymd(t) === TODAY;
+    el.className = 'asof' + (old ? ' old' : '');
+    el.innerHTML = `시간표 ${same ? '' : esc(`${t.getMonth() + 1}/${t.getDate()} `)}${num(`${pad(t.getHours())}:${pad(t.getMinutes())}`)} 기준`;
+    el.title = old ? '시간표가 오래됐어요. 알리미가 멈췄는지 확인해 보세요.' : '';
+  } else el.textContent = '';
+  const mine = S.wl.watches.length;
+  $('#tabs').innerHTML = [['pick', '회차 고르기'], ['mine', '내 감시'], ['movies', '관심 영화']].map(([k, name]) =>
+    `<button class="tab" role="tab" aria-selected="${S.tab === k}" data-act="tab" data-v="${k}">${name}${k === 'mine' && mine ? `<span class="count">${mine}</span>` : ''}</button>`).join('');
+}
+
+function viewPick() {
+  const brs = S.cat.branches;
+  if (!brs.length) return '<div class="empty"><b>영화관이 없어요</b>config.yaml의 지점 이름을 확인해 주세요.</div>';
+  const pickedDays = new Set([...S.picked.values()].filter(x => x.b === S.b).map(x => x.d));
+  let h = `<div class="label">영화관</div><div class="strip" data-keep="br">` +
+    brs.map(b => `<button class="chip" aria-pressed="${b.no === S.b}" data-act="branch" data-v="${esc(b.no)}">${esc(b.name)}</button>`).join('') + '</div>';
+
+  const days = daysOf(S.b);
+  if (!days.length) return h + '<div class="empty"><b>상영 일정이 없어요</b>이 영화관엔 지금 예매할 수 있는 회차가 없어요.</div>';
+  h += `<div class="label">날짜</div><div class="strip" data-keep="days">` + days.map(d => {
+    const dow = toDate(d).getDay();
+    return `<button class="day${pickedDays.has(d) ? ' has' : ''}" aria-pressed="${d === S.d}" data-act="day" data-v="${d}" aria-label="${dayText(d)}">
+      <span class="dow${dow === 6 ? ' sat' : dow === 0 ? ' sun' : ''}">${WEEK[dow]}</span>${num(+d.slice(6, 8))}<span class="tag">${d === TODAY ? '오늘' : d === TOMORROW ? '내일' : ''}</span></button>`;
+  }).join('') + '</div>';
+
+  const movies = moviesOf(S.b, S.d);
+  const pickedMovies = new Set([...S.picked.values()].filter(x => x.b === S.b && x.d === S.d).map(x => x.m));
+  h += `<div class="label">영화</div><div class="movies">` + movies.map(m =>
+    `<button class="movie${pickedMovies.has(m.no) ? ' has' : ''}" aria-pressed="${m.no === S.m}" data-act="movie" data-v="${esc(m.no)}">
+      ${m.poster ? `<img class="poster" src="${esc(m.poster)}" alt="" data-letter="${esc(m.name.slice(0, 1))}" loading="lazy" referrerpolicy="no-referrer">` : `<span class="poster">${esc(m.name.slice(0, 1))}</span>`}
+      <span class="title">${esc(m.name)}</span><span class="meta">${m.count}회차</span></button>`).join('') + '</div>';
+
+  if (S.m) {
+    const list = S.shows.filter(x => x.b === S.b && x.d === S.d && x.m === S.m).sort((a, b) => a.t.localeCompare(b.t));
+    h += `<div class="label">회차 <small>여러 개 골라도 돼요</small></div><div class="shows">` + list.map(x => {
+      const dis = S.disCount[hallKeyOf(x)] || 0;
+      const onlyDis = x.rest > 0 && x.rest <= dis;          // 남은 게 장애인석 수 이하면 일반석은 매진일 가능성이 큼
+      const full = x.rest === 0 || onlyDis, few = !full && x.rest != null && x.tot && x.rest / x.tot <= 0.08;
+      const left = x.rest == null ? '잔여석 확인 전' : x.rest === 0 ? '매진' : onlyDis ? `사실상 매진 <small>장애인석 ${x.rest}석만</small>`
+        : `잔여 ${num(x.rest)}${x.tot ? ` / ${x.tot}` : ''}`;
+      return `<button class="show" aria-pressed="${S.picked.has(x.id)}" data-act="show" data-v="${x.id}">
+        <span class="time num">${esc(x.t)}${x.e ? `<span class="end">~${esc(x.e)}</span>` : ''}</span>
+        <span class="hall">${esc([x.hall, x.kind].filter(Boolean).join(' '))}</span>
+        <span class="left${full ? ' full' : few ? ' few' : ''}">${left}</span></button>`;
+    }).join('') + '</div>';
+  } else if (!S.picked.size) {
+    h += '<p class="note">영화를 누르면 회차가 나와요. 매진된 회차를 골라 두면 취소표가 나올 때 알려 줘요.</p>';
+  }
+
+  if (S.picked.size) h += viewCond();
+  return h;
+}
+
+function viewCond() {
+  const picked = [...S.picked.values()].sort((a, b) => (a.d + a.t).localeCompare(b.d + b.t));
+  let h = `<div class="label">고른 회차 <small>${picked.length}개</small></div><div class="picked">` + picked.map(x =>
+    `<div class="pick-row"><span><b>${esc(movieOf(x.m).n || '')}</b><span class="when">${esc(branchName(x.b))} ${esc(dayText(x.d))} ${num(x.t)} ${esc(x.hall)}</span></span>
+      <button class="x" data-act="unpick" data-v="${x.id}" aria-label="이 회차 빼기">×</button></div>`).join('') + '</div>';
+
+  const lay = layoutNow(), halls = hallsOfPicked();
+  const hint = {
+    any: '어디든 자리가 나면 알려요. 장애인석만 남은 경우는 알리지 않아요.',
+    zone: '가운데 블록의 중간~뒤쪽 줄에 자리가 나면 알려요.',
+    pick: '배치도에서 좌석을 눌러 넣고 빼세요. 고른 좌석에 자리가 나면 알려요.',
+  }[S.mode];
+  h += `<div class="label">자리 조건</div><div class="cond">
+    <div class="row"><span>인원</span><span class="stepper">
+      <button data-act="n" data-v="-1" aria-label="인원 줄이기" ${S.n <= 1 ? 'disabled' : ''}>−</button>${num(S.n)}
+      <button data-act="n" data-v="1" aria-label="인원 늘리기" ${S.n >= 8 ? 'disabled' : ''}>+</button></span></div>
+    ${S.n >= 2 ? `<div class="row"><span>붙어 있는 자리만</span><button class="switch" role="switch" aria-checked="${S.adj}" data-act="adj" aria-label="붙어 있는 자리만"></button></div>` : ''}
+    <div class="modes" role="radiogroup" aria-label="자리 종류">
+      <button class="mode" role="radio" aria-checked="${S.mode === 'any'}" data-act="mode" data-v="any">아무 자리</button>
+      <button class="mode" role="radio" aria-checked="${S.mode === 'zone'}" data-act="mode" data-v="zone">좋은 자리</button>
+      <button class="mode" role="radio" aria-checked="${S.mode === 'pick'}" data-act="mode" data-v="pick" ${canPick() ? '' : 'disabled'}>직접 고르기</button>
+    </div>
+    <p class="hint">${hint}${!canPick() && S.layouts ? (halls.length > 1 ? ' 직접 고르기는 같은 상영관 회차만 골랐을 때 쓸 수 있어요.' : ' 이 상영관 배치도는 아직 준비 중이라 직접 고르기는 조금 뒤에 쓸 수 있어요.') : ''}</p>
+    ${lay ? viewHall(lay, halls.length) : ''}
+  </div>`;
+  return h;
+}
+
+function viewHall(lay, hallCount) {
+  const lit = litIds();
+  let W = 0, H = 0;
+  for (const s of lay.seats) { W = Math.max(W, s[2] + s[4]); H = Math.max(H, s[3] + 1); }
+  const rows = new Map();
+  for (const s of lay.seats) if (!rows.has(s[0])) rows.set(s[0], s[3]);
+  const seats = lay.seats.map(s => {
+    const id = s[0] + s[1];
+    return `<button class="seat${s[5] ? ' dis' : lit.has(id) ? ' lit' : ''}" style="--x:${s[2] + 1};--y:${s[3]};--w:${s[4]}" data-seat="${esc(id)}" ${s[5] ? 'tabindex="-1" aria-hidden="true"' : `aria-label="${esc(s[0])}열 ${esc(s[1])}번" aria-pressed="${lit.has(id)}"`} ${S.mode === 'pick' ? '' : 'tabindex="-1"'}><span>${esc(s[1])}</span></button>`;
+  }).join('');
+  const names = [...rows].map(([r, y]) => `<span class="rowname" style="--x:0;--y:${y}">${esc(r)}</span>`).join('');
+  const sum = S.mode === 'pick'
+    ? (S.seats.size ? `고른 좌석 ${num(S.seats.size)}개 <span style="color:var(--dust)">${esc(seatsText([...S.seats], lay, 20))}</span>` : '좌석을 눌러서 골라 주세요.')
+    : S.mode === 'zone' ? `좋은 자리 ${num(lit.size)}석 <span style="color:var(--dust)">${esc(zoneRows(lay, lit))}</span>` : `일반 좌석 ${num(lit.size)}석 전부`;
+  return `<div class="seatmap" data-w="${W + 1}" data-h="${H}">
+    <div class="map-head"><span class="name">${esc(lay.name || '')}${hallCount > 1 ? ` 외 ${hallCount - 1}개 관 (다른 관에도 같은 규칙을 적용해요)` : ''}</span>
+      <span class="tools">${S.mode === 'pick' ? '<button class="tool" data-act="zonefill">좋은 자리 채우기</button><button class="tool" data-act="clear">모두 지우기</button>' : ''}
+      <button class="tool" data-act="zoom">${S.zoom ? '전체 보기' : '크게 보기'}</button></span></div>
+    <div class="scroller" data-keep="hall"><div class="stage"><div class="beam"></div><div class="beam-label">스크린</div>
+      <div class="grid" id="grid">${names}${seats}</div></div></div>
+    <div class="seat-sum" id="seatsum" aria-live="polite">${sum}</div>
+    <div class="legend"><span><i class="lit"></i>${S.mode === 'pick' ? '고른 좌석' : '알림 대상'}</span><span><i></i>대상 아님</span><span><i class="dis"></i>장애인석</span></div>
+  </div>`;
+}
+function zoneRows(lay, lit) {
+  const rows = [...new Set(lay.seats.filter(s => lit.has(s[0] + s[1])).map(s => s[0]))];
+  return rows.length ? `${rows[0]}~${rows[rows.length - 1]}열 가운데` : '';
+}
+function fitHall() {
+  const hall = $('.seatmap');
+  if (!hall) return;
+  const W = +hall.dataset.w, H = +hall.dataset.h, room = $('.scroller', hall).clientWidth - 24;
+  const p = S.zoom ? 30 : Math.max(11, Math.min(30, Math.floor(room / W)));
+  const stage = $('.stage', hall), grid = $('#grid');
+  stage.style.width = `${p * W}px`;
+  grid.style.height = `${p * H}px`;
+  grid.style.setProperty('--p', `${p}px`);
+  grid.style.setProperty('--gap', `${p >= 22 ? 4 : p >= 15 ? 3 : 2}px`);
+  $$('.seat span', grid).forEach(el => { el.hidden = p < 22; });
+  if (S.center) {                 // 크게 볼 때는 가운데(또는 고른 좌석)부터 보이게
+    S.center = false;
+    const sc = $('.scroller', hall), lit = $('.seat.lit', grid);
+    sc.scrollLeft = lit ? lit.offsetLeft - sc.clientWidth / 2 : (sc.scrollWidth - sc.clientWidth) / 2;
+  }
+}
+
+function viewMine() {
+  const pend = store.get('pending', null);
+  const waiting = pend && Date.now() - pend.ts < 20 * 60000 ? pend.adds.filter(a => !S.wl.watches.some(w => w.show === a.show)) : [];
+  if (!S.wl.watches.length && !waiting.length)
+    return `<div class="empty"><b>걸어 둔 감시가 없어요</b>회차를 고르면 자리가 날 때 텔레그램으로 알려 줘요.<br><button class="tool" data-act="tab" data-v="pick">회차 고르러 가기</button></div>`;
+  const card = (w, wait) => `<div class="watch${S.dels.has(w.id) ? ' gone' : ''}${wait ? ' wait' : ''}">
+      <h3>${esc(w.mn)}</h3>
+      ${wait ? '' : `<button class="del" data-act="del" data-v="${esc(w.id)}">${S.dels.has(w.id) ? '되돌리기' : '삭제'}</button>`}
+      <p>${esc(w.bn)} ${esc(dayText(w.d))} ${num(w.t)} ${esc(w.hall || '')}</p>
+      <p>${esc(w.cond)}　<span class="state${w.ok ? ' ok' : ''}">${wait ? '보냄, 확인 답장 기다리는 중' : w.ok ? '지금 자리 있음' : w.rest === 0 ? '매진' : w.ok === false ? `맞는 자리 없음 (전체 잔여 ${w.rest == null ? '?' : w.rest}석)` : '확인 전'}</span></p></div>`;
+  return waiting.map(w => card(w, true)).join('') + S.wl.watches.map(w => card(w, false)).join('') +
+    `<p class="note">감시는 ${S.wl.max}개까지 걸 수 있어요. 상영이 시작되면 자동으로 끝나요.</p>`;
+}
+
+function viewMovies() {
+  const mine = S.wl.movies || [], fixed = S.wl.fixed || [];
+  const have = new Set([...mine, ...fixed, ...S.mvAdd].map(norm));
+  const sugg = Object.values(S.cat.movies).map(m => m.n).filter(n => n && !have.has(norm(n))).sort((a, b) => a.localeCompare(b, 'ko')).slice(0, 30);
+  return `<p class="note" style="margin-top:18px">관심 영화는 새 날짜 예매가 열릴 때와 특전 이벤트가 올라올 때 알려 줘요.</p>
+    <div class="label">지금 관심 영화</div>
+    <div class="tags">${fixed.map(m => `<span class="tag-chip fixed" title="설정 파일에 적힌 영화">${esc(m)}</span>`).join('')}
+      ${mine.map(m => `<span class="tag-chip${S.mvDel.has(m) ? ' gone' : ''}">${esc(m)}<button data-act="mvdel" data-v="${esc(m)}" aria-label="${esc(m)} ${S.mvDel.has(m) ? '되돌리기' : '빼기'}">${S.mvDel.has(m) ? '↺' : '×'}</button></span>`).join('')}
+      ${S.mvAdd.map(m => `<span class="tag-chip new">${esc(m)}<button data-act="mvundo" data-v="${esc(m)}" aria-label="${esc(m)} 취소">×</button></span>`).join('')}
+      ${!fixed.length && !mine.length && !S.mvAdd.length ? '<span class="note" style="margin:0">아직 없어요.</span>' : ''}</div>
+    <form class="addrow" id="mvform"><input id="mvinput" maxlength="40" placeholder="영화 제목 (일부만 써도 돼요)" autocomplete="off" enterkeyhint="done"><button type="submit">추가</button></form>
+    <p class="note">아직 예매가 안 열린 영화도 제목을 적어 두면 열릴 때 알려 줘요.</p>
+    ${sugg.length ? `<div class="label">지금 상영 중인 영화에서 고르기</div>${sugg.map(n => `<button class="suggest" data-act="mvadd" data-v="${esc(n)}"><span>${esc(n)}</span><span>추가</span></button>`).join('')}` : ''}`;
+}
+
+/* ── 보내기 ── */
+function changes() {
+  const p = {v: 1}, parts = [];
+  const ids = [...S.picked.keys()];
+  if (ids.length) {
+    const it = {ss: ids, n: S.n, k: S.mode};
+    if (S.n >= 2 && S.adj) it.adj = 1;
+    if (S.mode === 'pick') it.seats = [...S.seats].sort();
+    p.add = [it];
+    parts.push(`감시 추가 ${ids.length}건`);
+  }
+  if (S.dels.size) { p.del = [...S.dels]; parts.push(`감시 삭제 ${S.dels.size}건`); }
+  if (S.mvAdd.length) p['mv+'] = S.mvAdd.slice();
+  if (S.mvDel.size) p['mv-'] = [...S.mvDel];
+  if (S.mvAdd.length + S.mvDel.size) parts.push(`관심 영화 변경 ${S.mvAdd.length + S.mvDel.size}건`);
+  return {p, parts};
+}
+function condText() {
+  const base = S.mode === 'any' ? '아무 자리' : S.mode === 'zone' ? '좋은 자리' : `지정 좌석 ${S.seats.size}곳 중`;
+  return `${base} ${S.n}석${S.n >= 2 && S.adj ? ' 연석' : ''}`;
+}
+function renderBar() {
+  const bar = $('#bar'), {parts} = changes();
+  bar.hidden = !parts.length;
+  if (parts.length) {
+    bar.innerHTML = `<span class="what"><b>${esc(parts.join(', '))}</b>${S.picked.size ? esc(condText()) : '보내면 5분 안에 텔레그램으로 확인 답장이 와요'}</span>
+      <button class="go" data-act="send">보내기</button>`;
+  }
+  document.documentElement.style.setProperty('--bar-h', parts.length ? `${bar.offsetHeight}px` : '0px');
+}
+function toast(msg) {
+  $$('.toast').forEach(el => el.remove());
+  const el = document.createElement('div');
+  el.className = 'toast'; el.setAttribute('role', 'status'); el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3200);
+}
+function send() {
+  const {p} = changes();
+  if (S.picked.size && S.mode === 'pick') {
+    if (!S.seats.size) return toast('배치도에서 좌석을 하나 이상 골라 주세요.');
+    if (S.seats.size < S.n) return toast(`고른 좌석이 인원(${S.n}명)보다 적어요.`);
+  }
+  if (S.wl.watches.length - S.dels.size + S.picked.size > S.wl.max)
+    return toast(`감시는 ${S.wl.max}개까지예요. 회차를 줄이거나 안 쓰는 감시를 지워 주세요.`);
+  const json = JSON.stringify(p);
+  if (new TextEncoder().encode(json).length > 3800) return toast('한 번에 보내기엔 너무 많아요. 회차나 좌석을 줄여서 나눠 보내 주세요.');
+  store.set('pending', {ts: Date.now(), adds: [...S.picked.values()].map(x => ({show: x.id, mn: movieOf(x.m).n || '', bn: branchName(x.b), d: x.d, t: x.t, hall: x.hall, cond: condText()}))});
+  window.__lastPayload = json;
+  if (inTg && tg.sendData) {
+    try { tg.sendData(json); } catch (e) {}
+    setTimeout(() => codeSheet(json, true), 1800);   // 정상이면 그 전에 화면이 닫힘
+  } else codeSheet(json, false);
+}
+function codeSheet(json, wasTg) {
+  $$('.sheet').forEach(el => el.remove());
+  const el = document.createElement('div');
+  el.className = 'sheet';
+  el.innerHTML = `<div role="dialog" aria-label="코드로 보내기"><h2>${wasTg ? '자동으로 보내지지 않았어요' : '텔레그램 봇에게 코드로 보내기'}</h2>
+    <p class="note" style="margin:0">${wasTg ? '채팅방 아래의 🎬 버튼으로 연 화면이 아니면 자동 전송이 안 돼요. 아래 코드를 대신 보내 주세요.' : '이 화면을 텔레그램 밖에서 열어서 자동으로 보낼 수 없어요.'}</p>
+    <ol><li>아래 코드를 복사해요.</li><li>텔레그램에서 내 알리미 봇 채팅방에 붙여넣고 보내요.</li><li>5분 안에 확인 답장이 와요.</li></ol>
+    <textarea readonly id="code">${esc(CODE + ' ' + json)}</textarea>
+    <div class="btns"><button data-act="closesheet">닫기</button><button class="go" data-act="copy">코드 복사</button></div></div>`;
+  document.body.appendChild(el);
+}
+
+/* ── 눌렀을 때 ── */
+const haptic = () => { try { tg && tg.HapticFeedback && tg.HapticFeedback.selectionChanged(); } catch (e) {} };
+const ACT = {
+  tab(v) { S.tab = v; window.scrollTo(0, 0); },
+  reload() { load(); return false; },
+  branch(v) { S.b = v; store.set('branch', v); pickFirstDay(); },
+  day(v) { S.d = v; S.m = null; },
+  movie(v) { S.m = S.m === v ? null : v; },
+  show(v) {
+    if (S.picked.has(v)) S.picked.delete(v); else S.picked.set(v, S.byId.get(v));
+    syncHall();
+  },
+  unpick(v) { S.picked.delete(v); syncHall(); },
+  n(v) { S.n = Math.max(1, Math.min(8, S.n + +v)); },
+  adj() { S.adj = !S.adj; },
+  mode(v) { S.mode = v; if (v === 'pick' && !S.seats.size && layoutNow()) S.seats = zoneIds(layoutNow().seats); },
+  zoom() { S.zoom = !S.zoom; S.center = S.zoom; },
+  zonefill() { S.seats = zoneIds(layoutNow().seats); },
+  clear() { S.seats = new Set(); },
+  del(v) { S.dels.has(v) ? S.dels.delete(v) : S.dels.add(v); },
+  mvadd(v) { addMovie(v); },
+  mvundo(v) { S.mvAdd = S.mvAdd.filter(m => m !== v); },
+  mvdel(v) { S.mvDel.has(v) ? S.mvDel.delete(v) : S.mvDel.add(v); },
+  send() { send(); return false; },
+  closesheet() { $$('.sheet').forEach(el => el.remove()); return false; },
+  copy() {
+    const ta = $('#code');
+    const done = () => toast('복사했어요. 봇 채팅방에 붙여넣어 보내 주세요.');
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(done, () => { ta.select(); document.execCommand('copy'); done(); });
+    else { ta.select(); document.execCommand('copy'); done(); }
+    return false;
+  },
+};
+function addMovie(name) {
+  name = String(name || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+  if (!name) return;
+  const have = [...(S.wl.movies || []), ...(S.wl.fixed || []), ...S.mvAdd].map(norm);
+  if (have.includes(norm(name))) return toast('이미 관심 영화에 있어요.');
+  S.mvAdd.push(name);
+}
+document.addEventListener('click', e => {
+  const seat = e.target.closest('.seat'), grid = e.target.closest('#grid');
+  if (grid && S.mode === 'pick') return tapSeat(e, seat, grid);
+  const el = e.target.closest('[data-act]');
+  if (!el || el.disabled) return;
+  haptic();
+  if (ACT[el.dataset.act](el.dataset.v) !== false) render();
+});
+document.addEventListener('submit', e => {
+  if (e.target.id !== 'mvform') return;
+  e.preventDefault();
+  addMovie($('#mvinput').value);
+  render();
+  const input = $('#mvinput'); if (input) input.focus();
+});
+/* 좌석이 작게 보일 때도 잘 눌리게: 누른 곳에서 가장 가까운 좌석을 고름 */
+function tapSeat(e, seat, grid) {
+  if (!seat || seat.classList.contains('dis')) {
+    const r = grid.getBoundingClientRect(), p = parseFloat(grid.style.getPropertyValue('--p'));
+    let best = null, bd = 0.85 * p;
+    for (const el of $$('.seat:not(.dis)', grid)) {
+      const b = el.getBoundingClientRect();
+      const d = Math.hypot(b.left + b.width / 2 - e.clientX, b.top + b.height / 2 - e.clientY);
+      if (d < bd) { bd = d; best = el; }
+    }
+    seat = best;
+    if (!seat || r.width === 0) return;
+  }
+  const id = seat.dataset.seat, on = !S.seats.has(id);
+  on ? S.seats.add(id) : S.seats.delete(id);
+  seat.classList.toggle('lit', on);
+  seat.setAttribute('aria-pressed', on);
+  haptic();
+  const lay = layoutNow();
+  $('#seatsum').innerHTML = S.seats.size ? `고른 좌석 ${num(S.seats.size)}개 <span style="color:var(--dust)">${esc(seatsText([...S.seats], lay, 20))}</span>` : '좌석을 눌러서 골라 주세요.';
+  renderBar();
+}
+window.addEventListener('resize', fitHall);
+/* 포스터 그림이 안 열리면 제목 첫 글자로 대신함 */
+document.addEventListener('error', e => {
+  const img = e.target;
+  if (!img || !img.matches || !img.matches('img.poster')) return;
+  const span = document.createElement('span');
+  span.className = 'poster'; span.textContent = img.dataset.letter || '';
+  img.replaceWith(span);
+}, true);
+
+/* 텔레그램 스크립트는 화면을 막지 않게 따로 불러옴. 2.5초 안에 안 오면(텔레그램 밖) 그냥 시작 */
+let started = false;
+const start = () => { if (!started) { started = true; load(); } };
+function tgReady() {
+  tg = (window.Telegram && window.Telegram.WebApp) || null;
+  inTg = !!(tg && tg.platform && tg.platform !== 'unknown');
+  if (tg) {
+    try { tg.ready(); tg.expand(); tg.setHeaderColor && tg.setHeaderColor('#17121C'); tg.setBackgroundColor && tg.setBackgroundColor('#17121C'); } catch (e) {}
+  }
+  start();
+}
+const sdk = document.createElement('script');
+sdk.src = 'https://telegram.org/js/telegram-web-app.js';
+sdk.onload = tgReady;
+sdk.onerror = start;
+document.head.appendChild(sdk);
+setTimeout(start, 2500);
+})();
+</script>
+</body>
+</html>
