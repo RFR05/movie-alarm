@@ -1,0 +1,85 @@
+name: 영화 알리미
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"          # 5분마다 (GitHub 사정에 따라 몇 분씩 늦어질 수 있음)
+  workflow_dispatch:                # Actions 탭에서 직접 실행
+    inputs:
+      mode:
+        description: "normal=평소 감시 / test=텔레그램 테스트 / debug=사이트 응답 자세히 보기"
+        type: choice
+        options: [normal, test, debug]
+        default: normal
+
+permissions:
+  contents: write                   # data 브랜치에 저장
+  actions: write                    # 예약 실행이 60일 뒤 자동으로 꺼지는 걸 막는 데 필요
+
+concurrency:
+  group: movie-alarm
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 압축 파일로 올렸으면 풀기
+        run: |
+          # 폰으로 설치할 때: 저장소에 zip 하나만 올려 두면 여기서 풀어서 저장소에 넣어 줌 (한 번만)
+          if [ ! -f alarm/main.py ]; then
+            ZIP="$(ls ./*.zip 2>/dev/null | head -1 || true)"
+            if [ -z "$ZIP" ]; then
+              echo "::error::alarm 폴더도 zip 파일도 없어요. README의 설치 2단계를 확인해 주세요."
+              exit 1
+            fi
+            mkdir _unzip && unzip -q "$ZIP" -d _unzip
+            MAIN="$(find _unzip -path '*/alarm/main.py' | head -1)"
+            if [ -z "$MAIN" ]; then echo "::error::zip 안에 alarm/main.py 가 없어요."; exit 1; fi
+            SRC="$(dirname "$(dirname "$MAIN")")"
+            rm -rf "$SRC/.github"            # 워크플로 파일은 직접 만든 것을 그대로 씀
+            cp -r "$SRC"/. .
+            rm -rf _unzip "$ZIP"
+            git add -A
+            git -c user.name='movie-alarm-bot' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -qm "압축 파일 풀기"
+            git push -q
+            echo "압축을 풀어 저장소에 넣었어요."
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 패키지 설치
+        run: |
+          pip install -r requirements.txt
+          # 러너에 크롬이 있으면 그걸 쓰고, 없을 때만 크로미움을 받음
+          if ! command -v google-chrome >/dev/null; then python -m playwright install --with-deps chromium; fi
+
+      - name: 저장해 둔 데이터 불러오기
+        run: bash scripts/data.sh pull
+
+      - name: 확인
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ALARM_MODE: ${{ github.event.inputs.mode || 'normal' }}
+          BROWSER_CHANNEL: chrome
+        run: python -m alarm.main
+
+      - name: 데이터 저장
+        if: ${{ always() && (github.event.inputs.mode || 'normal') == 'normal' }}
+        run: bash scripts/data.sh push
+
+      - name: 예약 실행 유지
+        if: ${{ github.event_name == 'schedule' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 저장소에 60일 동안 활동이 없으면 GitHub가 예약 실행을 끄는데, 하루 한 번 '켜기'를 다시 눌러 둠
+          if [ "$(date -u +%H)" = "00" ]; then
+            gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/movie-alarm.yml/enable" >/dev/null 2>&1 || true
+          fi
