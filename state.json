@@ -1,0 +1,905 @@
+{
+ "branches": {
+  "day": "20261128",
+  "list": [
+   {
+    "area": "10",
+    "name": "강남",
+    "no": "1372"
+   },
+   {
+    "area": "10",
+    "name": "강동",
+    "no": "1341"
+   },
+   {
+    "area": "35",
+    "name": "검단",
+    "no": "4041"
+   },
+   {
+    "area": "55",
+    "name": "경북도청",
+    "no": "0040"
+   },
+   {
+    "area": "55",
+    "name": "경산하양",
+    "no": "7122"
+   },
+   {
+    "area": "30",
+    "name": "고양스타필드",
+    "no": "4121"
+   },
+   {
+    "area": "45",
+    "name": "공주",
+    "no": "3141"
+   },
+   {
+    "area": "30",
+    "name": "광명AK플라자",
+    "no": "0029"
+   },
+   {
+    "area": "30",
+    "name": "광명소하",
+    "no": "0053"
+   },
+   {
+    "area": "65",
+    "name": "광주상무",
+    "no": "5021"
+   },
+   {
+    "area": "65",
+    "name": "광주하남",
+    "no": "5061"
+   },
+   {
+    "area": "55",
+    "name": "구미강동",
+    "no": "7303"
+   },
+   {
+    "area": "10",
+    "name": "구의이스트폴",
+    "no": "0090"
+   },
+   {
+    "area": "10",
+    "name": "군자",
+    "no": "1431"
+   },
+   {
+    "area": "30",
+    "name": "금정AK플라자",
+    "no": "0035"
+   },
+   {
+    "area": "55",
+    "name": "김천",
+    "no": "7401"
+   },
+   {
+    "area": "30",
+    "name": "김포한강신도시",
+    "no": "4152"
+   },
+   {
+    "area": "30",
+    "name": "남양주현대아울렛스페이스원",
+    "no": "0019"
+   },
+   {
+    "area": "70",
+    "name": "남춘천",
+    "no": "2001"
+   },
+   {
+    "area": "55",
+    "name": "남포항",
+    "no": "0074"
+   },
+   {
+    "area": "45",
+    "name": "논산",
+    "no": "0018"
+   },
+   {
+    "area": "55",
+    "name": "대구세븐밸리(칠곡)",
+    "no": "0067"
+   },
+   {
+    "area": "55",
+    "name": "대구신세계(동대구)",
+    "no": "7011"
+   },
+   {
+    "area": "55",
+    "name": "대구이시아",
+    "no": "0022"
+   },
+   {
+    "area": "55",
+    "name": "대구프리미엄만경관",
+    "no": "0072"
+   },
+   {
+    "area": "45",
+    "name": "대전신세계아트앤사이언스",
+    "no": "0028"
+   },
+   {
+    "area": "45",
+    "name": "대전유성",
+    "no": "0009"
+   },
+   {
+    "area": "45",
+    "name": "대전중앙로",
+    "no": "3011"
+   },
+   {
+    "area": "45",
+    "name": "대전현대프리미엄아울렛",
+    "no": "0017"
+   },
+   {
+    "area": "10",
+    "name": "더부티크목동현대백화점",
+    "no": "0041"
+   },
+   {
+    "area": "55",
+    "name": "덕천",
+    "no": "6161"
+   },
+   {
+    "area": "30",
+    "name": "동탄",
+    "no": "4451"
+   },
+   {
+    "area": "30",
+    "name": "동탄역",
+    "no": "0089"
+   },
+   {
+    "area": "10",
+    "name": "마곡",
+    "no": "1572"
+   },
+   {
+    "area": "55",
+    "name": "마산(경남대)",
+    "no": "0076"
+   },
+   {
+    "area": "10",
+    "name": "목동",
+    "no": "1581"
+   },
+   {
+    "area": "65",
+    "name": "목포하당(포르모)",
+    "no": "5302"
+   },
+   {
+    "area": "30",
+    "name": "미사강변(하남종합운동장)",
+    "no": "0084"
+   },
+   {
+    "area": "30",
+    "name": "백석벨라시타",
+    "no": "4104"
+   },
+   {
+    "area": "30",
+    "name": "별내",
+    "no": "4722"
+   },
+   {
+    "area": "55",
+    "name": "부산극장",
+    "no": "6001"
+   },
+   {
+    "area": "55",
+    "name": "부산대",
+    "no": "0061"
+   },
+   {
+    "area": "30",
+    "name": "부천스타필드시티",
+    "no": "4221"
+   },
+   {
+    "area": "55",
+    "name": "북대구(칠곡)",
+    "no": "0025"
+   },
+   {
+    "area": "30",
+    "name": "분당",
+    "no": "4631"
+   },
+   {
+    "area": "55",
+    "name": "사상",
+    "no": "0032"
+   },
+   {
+    "area": "55",
+    "name": "삼천포",
+    "no": "6642"
+   },
+   {
+    "area": "10",
+    "name": "상봉",
+    "no": "1311"
+   },
+   {
+    "area": "10",
+    "name": "상암월드컵경기장",
+    "no": "1211"
+   },
+   {
+    "area": "55",
+    "name": "서면대한",
+    "no": "0082"
+   },
+   {
+    "area": "30",
+    "name": "성남모란",
+    "no": "0086"
+   },
+   {
+    "area": "45",
+    "name": "세종(조치원)",
+    "no": "3391"
+   },
+   {
+    "area": "45",
+    "name": "세종나성",
+    "no": "3392"
+   },
+   {
+    "area": "10",
+    "name": "센트럴",
+    "no": "1371"
+   },
+   {
+    "area": "70",
+    "name": "속초",
+    "no": "2171"
+   },
+   {
+    "area": "35",
+    "name": "송도(트리플스트리트)",
+    "no": "4062"
+   },
+   {
+    "area": "10",
+    "name": "송파파크하비오",
+    "no": "1381"
+   },
+   {
+    "area": "30",
+    "name": "수원",
+    "no": "0051"
+   },
+   {
+    "area": "30",
+    "name": "수원AK플라자(수원역)",
+    "no": "0052"
+   },
+   {
+    "area": "30",
+    "name": "수원남문",
+    "no": "0042"
+   },
+   {
+    "area": "30",
+    "name": "수원스타필드",
+    "no": "0062"
+   },
+   {
+    "area": "30",
+    "name": "수원인계",
+    "no": "0060"
+   },
+   {
+    "area": "30",
+    "name": "수원호매실(휴관)",
+    "no": "0036"
+   },
+   {
+    "area": "65",
+    "name": "순천",
+    "no": "5401"
+   },
+   {
+    "area": "30",
+    "name": "시흥배곧",
+    "no": "4291"
+   },
+   {
+    "area": "30",
+    "name": "시흥정왕",
+    "no": "0088"
+   },
+   {
+    "area": "30",
+    "name": "안산중앙",
+    "no": "4253"
+   },
+   {
+    "area": "30",
+    "name": "안성스타필드",
+    "no": "0020"
+   },
+   {
+    "area": "55",
+    "name": "양산",
+    "no": "0097"
+   },
+   {
+    "area": "55",
+    "name": "양산증산",
+    "no": "6262"
+   },
+   {
+    "area": "65",
+    "name": "여수웅천",
+    "no": "5552"
+   },
+   {
+    "area": "35",
+    "name": "영종하늘도시",
+    "no": "0080"
+   },
+   {
+    "area": "45",
+    "name": "오창",
+    "no": "3631"
+   },
+   {
+    "area": "30",
+    "name": "용인테크노밸리",
+    "no": "4462"
+   },
+   {
+    "area": "55",
+    "name": "울산",
+    "no": "0057"
+   },
+   {
+    "area": "70",
+    "name": "원주혁신",
+    "no": "2202"
+   },
+   {
+    "area": "30",
+    "name": "의정부민락",
+    "no": "0070"
+   },
+   {
+    "area": "10",
+    "name": "이수",
+    "no": "0099"
+   },
+   {
+    "area": "35",
+    "name": "인천논현",
+    "no": "4051"
+   },
+   {
+    "area": "35",
+    "name": "인천학익(시티오씨엘)",
+    "no": "0085"
+   },
+   {
+    "area": "65",
+    "name": "전대(광주)",
+    "no": "0010"
+   },
+   {
+    "area": "65",
+    "name": "전주객사",
+    "no": "0050"
+   },
+   {
+    "area": "65",
+    "name": "전주혁신",
+    "no": "0021"
+   },
+   {
+    "area": "80",
+    "name": "제주삼화",
+    "no": "0059"
+   },
+   {
+    "area": "80",
+    "name": "제주서귀포",
+    "no": "0054"
+   },
+   {
+    "area": "80",
+    "name": "제주아라",
+    "no": "0066"
+   },
+   {
+    "area": "55",
+    "name": "진주(중안)",
+    "no": "0045"
+   },
+   {
+    "area": "45",
+    "name": "진천",
+    "no": "3651"
+   },
+   {
+    "area": "55",
+    "name": "창원",
+    "no": "0048"
+   },
+   {
+    "area": "45",
+    "name": "천안",
+    "no": "0056"
+   },
+   {
+    "area": "65",
+    "name": "첨단",
+    "no": "5064"
+   },
+   {
+    "area": "35",
+    "name": "청라지젤(휴관)",
+    "no": "0027"
+   },
+   {
+    "area": "45",
+    "name": "청주사창",
+    "no": "0049"
+   },
+   {
+    "area": "45",
+    "name": "청주성안길",
+    "no": "0069"
+   },
+   {
+    "area": "45",
+    "name": "청주터미널",
+    "no": "0094"
+   },
+   {
+    "area": "70",
+    "name": "춘천석사",
+    "no": "0037"
+   },
+   {
+    "area": "45",
+    "name": "충주연수",
+    "no": "0068"
+   },
+   {
+    "area": "10",
+    "name": "코엑스",
+    "no": "1351"
+   },
+   {
+    "area": "30",
+    "name": "킨텍스",
+    "no": "4112"
+   },
+   {
+    "area": "30",
+    "name": "파주금촌",
+    "no": "4132"
+   },
+   {
+    "area": "30",
+    "name": "파주운정",
+    "no": "4115"
+   },
+   {
+    "area": "30",
+    "name": "평내호평역(구.남양주)",
+    "no": "0039"
+   },
+   {
+    "area": "30",
+    "name": "평택비전",
+    "no": "0064"
+   },
+   {
+    "area": "10",
+    "name": "픽쳐하우스(휴관)",
+    "no": "0081"
+   },
+   {
+    "area": "30",
+    "name": "하남스타필드",
+    "no": "4651"
+   },
+   {
+    "area": "55",
+    "name": "해운대(장산)",
+    "no": "0079"
+   },
+   {
+    "area": "10",
+    "name": "홍대(아니메)",
+    "no": "1212"
+   },
+   {
+    "area": "45",
+    "name": "홍성내포",
+    "no": "3501"
+   },
+   {
+    "area": "10",
+    "name": "화곡",
+    "no": "0083"
+   },
+   {
+    "area": "55",
+    "name": "화명",
+    "no": "0087"
+   }
+  ],
+  "want": [
+   "대구"
+  ]
+ },
+ "catalog_req": false,
+ "catalog_ts": "2026-11-28T22:26:43+09:00",
+ "fail_count": 0,
+ "init": {
+  "mb_booking": true,
+  "mb_events": true
+ },
+ "layout_tries": 0,
+ "mb_branch_entries": [
+  "대구|"
+ ],
+ "mb_dates": {
+  "0022||26045800": [],
+  "0025||26045800": [],
+  "0067||26045800": [
+   "20261128",
+   "20261129",
+   "20261130",
+   "20261201"
+  ],
+  "0072||26045800": [
+   "20261128",
+   "20261129",
+   "20261130",
+   "20261201"
+  ],
+  "7011||26045800": [
+   "20261128",
+   "20261129",
+   "20261130",
+   "20261201"
+  ]
+ },
+ "mb_events_seen": [
+  "16973",
+  "19894",
+  "19895",
+  "19896",
+  "19897",
+  "19898",
+  "20177",
+  "20373",
+  "20753",
+  "21174",
+  "21482",
+  "21500",
+  "21513",
+  "21533",
+  "21545",
+  "21551",
+  "21554",
+  "21585",
+  "21608",
+  "21621",
+  "21629",
+  "21632",
+  "21634",
+  "21635",
+  "21636",
+  "21637",
+  "21638",
+  "21643",
+  "21644",
+  "21645",
+  "21646",
+  "21647",
+  "21649",
+  "21650",
+  "21651",
+  "21652",
+  "21653",
+  "21654",
+  "21655",
+  "21656",
+  "21657",
+  "21658",
+  "21659",
+  "21660",
+  "21661",
+  "21663",
+  "21665",
+  "21667",
+  "21668",
+  "21669",
+  "21670",
+  "21671",
+  "21672",
+  "21673",
+  "21674",
+  "21677",
+  "21679",
+  "21680",
+  "21682",
+  "21683",
+  "21684",
+  "21685",
+  "21686",
+  "21687",
+  "21688",
+  "21690",
+  "21691",
+  "21692",
+  "21693",
+  "21696",
+  "21697",
+  "21698",
+  "21699",
+  "21700",
+  "21701",
+  "21702",
+  "21703",
+  "21704",
+  "21705",
+  "21706",
+  "21707",
+  "21708",
+  "21710",
+  "21711",
+  "21712",
+  "21713",
+  "21714",
+  "21715",
+  "21716",
+  "21717",
+  "21718",
+  "21719",
+  "21720",
+  "21721",
+  "21722",
+  "21723",
+  "21724",
+  "21725",
+  "21726",
+  "21727",
+  "21728",
+  "21729",
+  "21730",
+  "21731",
+  "21732",
+  "21733",
+  "21734",
+  "21735",
+  "21737",
+  "21738",
+  "21739",
+  "21740",
+  "21741",
+  "21742",
+  "21743",
+  "21744",
+  "21745",
+  "21747",
+  "21750",
+  "21751",
+  "21753",
+  "21754",
+  "21755",
+  "21756",
+  "21757",
+  "21758",
+  "21759",
+  "21762",
+  "21764",
+  "21765",
+  "21766",
+  "21767",
+  "21768",
+  "21769",
+  "21772",
+  "21773",
+  "21774",
+  "21776",
+  "21778"
+ ],
+ "mb_titles": [
+  "[아트그라피]룩백",
+  "룩백"
+ ],
+ "mb_warned": [],
+ "menu_url": "https://rfr05.github.io/movie-alarm/",
+ "movies": [
+  "룩 백",
+  "[아트그라피] 룩백"
+ ],
+ "posters": {
+  "00041800": "https://img.megabox.co.kr/SharedImg/2026/11/05/iNhYyEwAzxDI6qCF29rW2ZKJVelP4bfB_150.jpg",
+  "00212800": "https://img.megabox.co.kr/SharedImg/asis/system/mop/poster/2010/AB/9CF3A8-7414-4F30-8667-8C6CD6E883DF.small.jpg",
+  "01377700": "https://img.megabox.co.kr/SharedImg/asis/system/mop/poster/2018/58/BE00CB-0535-4555-BE24-BE18E99CF04E.small.jpg",
+  "20007800": "https://img.megabox.co.kr/SharedImg/2026/11/16/PDGEKGWynFsvsXBDopq4I65C1gHS0ltC_150.jpg",
+  "20007801": "/SharedImg/2026/11/16/PDGEKGWynFsvsXBDopq4I65C1gHS0ltC.jpg",
+  "20007804": "/SharedImg/2026/11/16/PDGEKGWynFsvsXBDopq4I65C1gHS0ltC.jpg",
+  "21058500": "https://img.megabox.co.kr/SharedImg/2026/11/25/P5uTNj7ca6ZGYfbLpFTJNppsmFQbv5Fh_150.jpg",
+  "22059800": "https://img.megabox.co.kr/SharedImg/2022/09/29/irEm2oBzKVuN7ZqQOuTYmtrUDo8acBql_150.jpg",
+  "23029800": "https://img.megabox.co.kr/SharedImg/2023/05/04/YO8FkDfDvXVS497zqnClLzcS494pnOmI_150.jpg",
+  "24080100": "https://img.megabox.co.kr/SharedImg/2024/12/18/CyNei6ffXQ6xmS9jUAkGUkhEyu6VXfpP_150.jpg",
+  "24082700": "https://img.megabox.co.kr/SharedImg/2024/11/28/LHkPFJvJTBTMhKGB0qFjIkH3RgcXMCqH_150.jpg",
+  "25043600": "https://img.megabox.co.kr/SharedImg/2025/06/30/37XxKbtAVnAVvuLissb2RC0XNS9YfyhQ_150.jpg",
+  "25050300": "https://img.megabox.co.kr/SharedImg/2025/07/30/2rjo3n80E7xYoxI7Iegwbscv3eop38HQ_150.jpg",
+  "25091800": "https://img.megabox.co.kr/SharedImg/2026/01/08/b1FPj8UiHahtkkaUjPJLWBtKmXgeTg9d_150.jpg",
+  "25098100": "https://img.megabox.co.kr/SharedImg/2025/11/24/atc63o0MvVJy70xklHoXtlo3auq0QVFw_150.jpg",
+  "25098400": "https://img.megabox.co.kr/SharedImg/2025/11/24/fdbLjX1TSPSLRZ4CaGzmLdhO8lfrj39F_150.jpg",
+  "25098600": "https://img.megabox.co.kr/SharedImg/2025/11/24/qnzstvr4ED7sIyPmV20rVWyFMyBEkE03_150.jpg",
+  "25099700": "https://img.megabox.co.kr/SharedImg/2025/11/25/rXIsVXJuhyPKsBXZaHCWkFWBFBNVAbgW_150.jpg",
+  "26002800": "https://img.megabox.co.kr/SharedImg/2026/03/12/9157SpOOjTFBu7wlpiDaaM6eflVOcajl_150.jpg",
+  "26013700": "https://img.megabox.co.kr/SharedImg/2026/04/01/kK1sBdBdb6A5nvVQPkROk1Perq17aHp4_150.jpg",
+  "26014500": "https://img.megabox.co.kr/SharedImg/2026/11/04/hceDAYcUoOHaXZi7FeB8JsNqzOT8VZkk_150.jpg",
+  "26018900": "https://img.megabox.co.kr/SharedImg/2026/07/14/ZmQ2AFTDWOzTK9nTBtdaM3b2evITLQsn_150.jpg",
+  "26018904": "/SharedImg/2026/07/14/ZmQ2AFTDWOzTK9nTBtdaM3b2evITLQsn.jpg",
+  "26020100": "https://img.megabox.co.kr/SharedImg/2026/03/30/JU4i4iAK4yUcDVrQa2dKwGOOkNnvC3Xm_150.jpg",
+  "26025300": "https://img.megabox.co.kr/SharedImg/2026/10/28/aQonIsuA1h9FurBHXDSEHB0ZJyBg3OoR_150.jpg",
+  "26026900": "https://img.megabox.co.kr/SharedImg/2026/04/29/FyiBjxdylQsEEJ35vgPuoWVfwEnf4OAX_150.jpg",
+  "26028000": "https://img.megabox.co.kr/SharedImg/2026/07/21/eLukRl9OyMGUzwkS0G6kDtCTGy3IPB2i_150.jpg",
+  "26028016": "/SharedImg/2026/07/21/eLukRl9OyMGUzwkS0G6kDtCTGy3IPB2i.jpg",
+  "26034400": "https://img.megabox.co.kr/SharedImg/2026/06/04/tHi883U3Y6fGwIr6qFxeyFWNKjbFHPcq_150.jpg",
+  "26034700": "https://img.megabox.co.kr/SharedImg/2026/08/12/xsxGiT4k4r2TNguyOsSpgbG53xn13R7c_150.jpg",
+  "26035100": "https://img.megabox.co.kr/SharedImg/2026/09/15/F4fA6MTLEjYdyAeIcA2zl22vS23TYZe3_150.jpg",
+  "26042200": "https://img.megabox.co.kr/SharedImg/2026/07/01/bHP7iGpmS5oPzuA4igs7NgdMvrJI6TYO_150.jpg",
+  "26044700": "https://img.megabox.co.kr/SharedImg/2026/10/01/0ggtL8vQV0r8uQlrk3bS0LNVFKdFgPyl_150.jpg",
+  "26044701": "/SharedImg/2026/10/01/0ggtL8vQV0r8uQlrk3bS0LNVFKdFgPyl.jpg",
+  "26045500": "https://img.megabox.co.kr/SharedImg/2026/07/07/EZH4oINiDLR3Qdov8DgaMKkhakMOamKn_150.jpg",
+  "26045800": "https://img.megabox.co.kr/SharedImg/2026/10/12/Bue19JIhonhAecm0fSpFw6Fgh6f5Pi39_150.jpg",
+  "26045811": "/SharedImg/2026/10/12/Bue19JIhonhAecm0fSpFw6Fgh6f5Pi39.jpg",
+  "26046100": "https://img.megabox.co.kr/SharedImg/2026/09/09/vVYXXTmr7Pis8rbTHwcJvy7Nem8JdwfP_150.jpg",
+  "26046900": "https://img.megabox.co.kr/SharedImg/2026/09/09/A4MDNoiNvxHCvDxnKsSP4M4NfzLgopyN_150.jpg",
+  "26048500": "https://img.megabox.co.kr/SharedImg/2026/10/24/wPOxcQ2Ku6nkttzGi9YjR74lZB1Tqsz8_150.jpg",
+  "26048501": "/SharedImg/2026/10/24/wPOxcQ2Ku6nkttzGi9YjR74lZB1Tqsz8.jpg",
+  "26048502": "/SharedImg/2026/10/24/wPOxcQ2Ku6nkttzGi9YjR74lZB1Tqsz8.jpg",
+  "26050100": "https://img.megabox.co.kr/SharedImg/2026/11/11/pt9dzP5FV8GagfDsoUOZvic7Tptcpslw_150.jpg",
+  "26050101": "/SharedImg/2026/11/11/pt9dzP5FV8GagfDsoUOZvic7Tptcpslw.jpg",
+  "26056400": "https://img.megabox.co.kr/SharedImg/2026/09/26/xWAqYfHDJusD2Qy6YhRXf5iQxea5S0oc_150.jpg",
+  "26057100": "https://img.megabox.co.kr/SharedImg/2026/10/24/ZgAu5E8lJzUZbRDXpzAFX3uJYaAtl3Ln_150.jpg",
+  "26057700": "https://img.megabox.co.kr/SharedImg/2026/08/14/jh6UscZuFLOCGbEN1WsoyMFXAWzPRy7I_150.jpg",
+  "26058900": "https://img.megabox.co.kr/SharedImg/2026/10/14/ftMynesIgnNFPtPj59KlhsG6ifaruRgW_150.png",
+  "26059000": "https://img.megabox.co.kr/SharedImg/2026/09/09/R68VHYW02py9mQaft8wv37SvQTQ2zrel_150.jpg",
+  "26059100": "https://img.megabox.co.kr/SharedImg/2026/10/24/oYWx8Q3W7dU8LrxnvTcWlprciKJBjGBD_150.jpg",
+  "26059500": "https://img.megabox.co.kr/SharedImg/2026/10/17/Vwr46oShLPEaU1VCcfo3tW06NmpH6sf6_150.jpg",
+  "26061000": "https://img.megabox.co.kr/SharedImg/2026/09/14/xStafSAGxwoqiJaSI7rK5t6IhTf57Gge_150.jpg",
+  "26061100": "https://img.megabox.co.kr/SharedImg/2026/10/12/Wf8wZGSnik9hxouRLVify0tIrHFHvJ0d_150.jpg",
+  "26061400": "https://img.megabox.co.kr/SharedImg/2026/09/08/GEuQe0CnGi8AeFxSYwGOLYc8hZdcubZ7_150.jpg",
+  "26061401": "/SharedImg/2026/09/08/GEuQe0CnGi8AeFxSYwGOLYc8hZdcubZ7.jpg",
+  "26061500": "https://img.megabox.co.kr/SharedImg/2026/09/17/LKT9lhcD1WPtZ4xafKTIMqFd4uRhikSP_150.jpg",
+  "26061600": "https://img.megabox.co.kr/SharedImg/2026/10/12/qew1WOrBrq40Qw8WrZant3EwS1ecoUcy_150.jpg",
+  "26061700": "https://img.megabox.co.kr/SharedImg/2026/09/14/ZHXprRwxE8ChW944cphErqM2UEMCrLli_150.jpg",
+  "26062300": "https://img.megabox.co.kr/SharedImg/2026/09/09/a6kKDIjn5hqVJaiieRu1mq7wksYUXKHP_150.jpg",
+  "26063200": "https://img.megabox.co.kr/SharedImg/2026/09/11/4gQshqkg2I4mMI7Ljtw7PjnCz7bjI5e2_150.jpg",
+  "26063500": "https://img.megabox.co.kr/SharedImg/2026/11/17/VTgM4G2mHDgeLubOj5Jygn3l3QltSgrN_150.jpg",
+  "26063501": "/SharedImg/2026/11/17/VTgM4G2mHDgeLubOj5Jygn3l3QltSgrN.jpg",
+  "26064300": "https://img.megabox.co.kr/SharedImg/2026/09/17/duh7AP1sbiRfzLpU3rB1aL3MSvhVBUiB_150.jpg",
+  "26064700": "https://img.megabox.co.kr/SharedImg/2026/10/24/Lkzjg9pWkloZHmb3R9mjzOlG1x5TPFZ5_150.jpg",
+  "26064800": "https://img.megabox.co.kr/SharedImg/2026/09/22/s1AGWjiRyBDyR0UXN9FmZh1jROiaB6pq_150.jpg",
+  "26065000": "https://img.megabox.co.kr/SharedImg/2026/11/10/Re32NcayEsIrl1MNQzdGCsZ9vv6sltX0_150.jpg",
+  "26065002": "/SharedImg/2026/11/10/Re32NcayEsIrl1MNQzdGCsZ9vv6sltX0.jpg",
+  "26065200": "https://img.megabox.co.kr/SharedImg/2026/09/22/33ftW4QXhTAA5p5f6TVMliNqapqK0c2y_150.jpg",
+  "26066400": "https://img.megabox.co.kr/SharedImg/2026/10/04/fCBd4BZrkxniF4Ge9MSEwinkxr72VOSq_150.jpg",
+  "26066700": "https://img.megabox.co.kr/SharedImg/2026/11/08/AZbt25bN0wlLXYEXhzurnfyVEstwY8qK_150.jpg",
+  "26066701": "/SharedImg/2026/11/08/AZbt25bN0wlLXYEXhzurnfyVEstwY8qK.jpg",
+  "26067500": "https://img.megabox.co.kr/SharedImg/2026/10/11/aX8w3zy8AtX03R7gefXi01gD3Wl5dDxD_150.jpg",
+  "26067501": "/SharedImg/2026/10/11/aX8w3zy8AtX03R7gefXi01gD3Wl5dDxD.jpg",
+  "26067700": "https://img.megabox.co.kr/SharedImg/2026/10/24/XAp3tmDpER3tPao6SZxdxwPnOxbfKcaG_150.jpg",
+  "26067701": "/SharedImg/2026/10/24/XAp3tmDpER3tPao6SZxdxwPnOxbfKcaG.jpg",
+  "26067800": "https://img.megabox.co.kr/SharedImg/2026/10/11/qbNvUEI6kPtFsNEMlTOvpicAKJ6d7D7R_150.jpg",
+  "26068000": "https://img.megabox.co.kr/SharedImg/2026/10/24/KIzUrVECCOHqwZbSSGYCF3QNzurBFPKO_150.jpg",
+  "26068100": "https://img.megabox.co.kr/SharedImg/2026/11/09/Jm2MSEnNvFgO3uE1lmaBupPZyn75fQzb_150.jpg",
+  "26068300": "https://img.megabox.co.kr/SharedImg/2026/10/11/FujDr36WSX6AWxQ4JmHr9ON4NN5HMNwv_150.jpg",
+  "26068400": "https://img.megabox.co.kr/SharedImg/2026/10/11/OWaNqJHQt7swAVuTsI3yzkEWE03l6SPw_150.jpg",
+  "26068600": "https://img.megabox.co.kr/SharedImg/2026/10/18/pFVXXAngNRUWzu8SuBFMps1igujNMqMN_150.jpg",
+  "26068800": "https://img.megabox.co.kr/SharedImg/2026/10/17/npC2oJ27Vu9lzQRujJBJ3FqBdsfdRWdV_150.jpg",
+  "26068900": "https://img.megabox.co.kr/SharedImg/2026/10/28/YLb7zuSr8nqFovzWkwCfK6yQ5VQc0VjH_150.jpg",
+  "26068901": "/SharedImg/2026/10/28/YLb7zuSr8nqFovzWkwCfK6yQ5VQc0VjH.jpg",
+  "26069000": "https://img.megabox.co.kr/SharedImg/2026/10/26/LZkC3Jt2qvgA9c7dXYFnLGUVMCV2K0p6_150.jpg",
+  "26069200": "https://img.megabox.co.kr/SharedImg/2026/10/27/0FZVLacJAVqsefC5GEYXDt45fsVVlSFn_150.jpg",
+  "26069300": "https://img.megabox.co.kr/SharedImg/2026/10/27/Cj5robaflux5XrAxI8yiTTr7Cxf3WbXy_150.jpg",
+  "26069700": "https://img.megabox.co.kr/SharedImg/2026/10/14/OU0Rc6LA06uy3mle470W7PDbDZflUnJ3_150.jpg",
+  "26069701": "/SharedImg/2026/10/14/OU0Rc6LA06uy3mle470W7PDbDZflUnJ3.jpg",
+  "26069800": "https://img.megabox.co.kr/SharedImg/2026/11/25/skyWJyA8roeMTH3MRhI40LxsUtGuHHKq_150.png",
+  "26069801": "/SharedImg/2026/11/09/NhtSHfCW5Jf7Hqh7KlWXpE6DFLjmqHab.png",
+  "26069900": "https://img.megabox.co.kr/SharedImg/2026/10/14/x6E6Tkv57iAlQV7YrGOyeuTX6KYY14o5_150.jpg",
+  "26070000": "https://img.megabox.co.kr/SharedImg/2026/11/07/0FjtMLyFINwuDGeUcNyWpS45Km7xyE86_150.jpg",
+  "26070001": "/SharedImg/2026/11/07/0FjtMLyFINwuDGeUcNyWpS45Km7xyE86.jpg",
+  "26070400": "https://img.megabox.co.kr/SharedImg/2026/10/15/O9d9KgYsx44PSmtn1Kcsuk2E9nGWLBlX_150.jpg",
+  "26070500": "https://img.megabox.co.kr/SharedImg/2026/10/27/jV3Wa1wwwx5tVCSvB61AKJXUrePWWMHZ_150.jpg",
+  "26070900": "https://img.megabox.co.kr/SharedImg/2026/10/18/QTyvcyDypu1LS7YmS67FKiN7HDspc92A_150.jpg",
+  "26071100": "https://img.megabox.co.kr/SharedImg/2026/11/07/99lhPRy6P4uYlvv0RQaVdMR7TxlGzSv7_150.jpg",
+  "26071800": "https://img.megabox.co.kr/SharedImg/2026/11/07/o99NV5syj5OacHtoI8TfvYl0zy47Eywq_150.jpg",
+  "26071900": "https://img.megabox.co.kr/SharedImg/2026/10/24/kHZpHJXmn5bnQ1yzHfVK2TrpFIY8MvZo_150.jpg",
+  "26072300": "https://img.megabox.co.kr/SharedImg/2026/10/24/3ZsLILeD2OcbBOT9FGlKx1f9Z6NxC6Yy_150.jpg",
+  "26072400": "https://img.megabox.co.kr/SharedImg/2026/10/24/hQS0WtMkbLxRAWGropeDlb2Ry2Oxk52B_150.jpg",
+  "26072500": "https://img.megabox.co.kr/SharedImg/2026/11/08/goKb8bpEfXfMMuokBlHevxosmQ6L7osd_150.jpg",
+  "26072600": "https://img.megabox.co.kr/SharedImg/2026/11/09/J3YkmiPdFWi4Es6mRHcbjRFMpRmkYRKJ_150.png",
+  "26072700": "https://img.megabox.co.kr/SharedImg/2026/10/24/halHEqNLCKq6xe4BZVzPqytZo4Iee48a_150.jpg",
+  "26072800": "https://img.megabox.co.kr/SharedImg/2026/10/25/yu7bT8XZCdmN73pYLdHFtMBdNeoFrO62_150.jpg",
+  "26073100": "https://img.megabox.co.kr/SharedImg/2026/10/28/a0obIF4whY8TnujTBZnHt1y6LKOkZVFn_150.jpg",
+  "26073200": "https://img.megabox.co.kr/SharedImg/2026/11/08/VrrBtS9KOo5xXq0m83g9FXK4jQwypf8Q_150.jpg",
+  "26073300": "https://img.megabox.co.kr/SharedImg/2026/10/28/XMCWiYXOoGeNAO73Rt1LyZtDWPi09HnP_150.jpg",
+  "26073600": "https://img.megabox.co.kr/SharedImg/2026/10/28/7h93shc8C5iVUJyFFMYcFAmsqQ4uwpUP_150.jpg",
+  "26074000": "https://img.megabox.co.kr/SharedImg/2026/11/17/wtxhk8Z8LkPJKuJeLPtnDiG7deXPr35v_150.jpg",
+  "26074300": "https://img.megabox.co.kr/SharedImg/2026/11/02/CocodPlcdOFt80NwlGVQpaNZUaMVlwrB_150.jpg",
+  "26074500": "https://img.megabox.co.kr/SharedImg/2026/11/02/65d5LTrEtmOmKxS1fJmxU07YJ2X8cvoy_150.png",
+  "26074600": "https://img.megabox.co.kr/SharedImg/2026/11/02/nVP79PPZvq1GDQnpTSPcNnKx7pXiBMWX_150.jpg",
+  "26074700": "https://img.megabox.co.kr/SharedImg/2026/11/02/8iyPm4CnCNxKK7qCGLPXxjxP2Ol7pwKd_150.jpg",
+  "26075200": "https://img.megabox.co.kr/SharedImg/2026/11/07/LpSyS5kDNOlsLRqDvj4XNZvaV5Mmpx37_150.jpg",
+  "26075600": "https://img.megabox.co.kr/SharedImg/2026/11/07/uei9iMeAwgHfOkfNRoofOroqzRBMVYmY_150.jpg",
+  "26075700": "https://img.megabox.co.kr/SharedImg/2026/11/07/zJ3yGkFlbIZrk0fOsQ8qvVmjAG2k4cpC_150.jpg",
+  "26076000": "https://img.megabox.co.kr/SharedImg/2026/11/08/EV6n9PMAsHlGlGB5i19FswFjHBzHg0Aa_150.jpg",
+  "26076200": "https://img.megabox.co.kr/SharedImg/2026/11/16/kKx6eWFkiLz9BGh9TIEsCHdI4OTPNj6f_150.jpg",
+  "26076201": "/SharedImg/2026/11/16/kKx6eWFkiLz9BGh9TIEsCHdI4OTPNj6f.jpg",
+  "26076300": "https://img.megabox.co.kr/SharedImg/2026/11/09/ZoLimAMJADNhPgr487OWfCYrx6sUNFJU_150.png",
+  "26076400": "https://img.megabox.co.kr/SharedImg/2026/11/09/i0Buo8ASQQ2E6fqq3vpVeZdVoPctoBfh_150.png",
+  "26076500": "https://img.megabox.co.kr/SharedImg/2026/11/09/Q7H0SrDuhgXg0jfLfXsR3HQoHYCVXt0J_150.png",
+  "26076700": "https://img.megabox.co.kr/SharedImg/2026/11/09/4lYiKFRkQceMjiLhgq3Ts8qZN9ls2d4W_150.png",
+  "26076800": "https://img.megabox.co.kr/SharedImg/2026/11/09/s2cmoXKT5cXUqqdFVRZ4XM5u9kVcx6Sy_150.png",
+  "26076900": "https://img.megabox.co.kr/SharedImg/2026/11/09/2Vd8YnOlpsPEiJOKvvtWdqPiomrjD3xs_150.png",
+  "26077000": "https://img.megabox.co.kr/SharedImg/2026/11/09/LXbcoIKO32Zwb8x3yu3uw6eKqsiV26gs_150.png",
+  "26077100": "https://img.megabox.co.kr/SharedImg/2026/11/09/2JZ6hYBKApbkCJXncdDWTNsFc8tY79aH_150.png",
+  "26077200": "https://img.megabox.co.kr/SharedImg/2026/11/09/NbVdZRbphiIvWmpAvCin4r9eWvkX6G78_150.png",
+  "26077300": "https://img.megabox.co.kr/SharedImg/2026/11/09/FwRAYngQl2ymaooMHLAkXHU1IEG6mhln_150.png",
+  "26077400": "https://img.megabox.co.kr/SharedImg/2026/11/09/Uokd696mVgiUbp9no1Sf4AxrFdhYdAAL_150.png",
+  "26077500": "https://img.megabox.co.kr/SharedImg/2026/11/09/1kLFRVM6u8idt1oOrIqNNpH9SkvKi8Kr_150.png",
+  "26077600": "https://img.megabox.co.kr/SharedImg/2026/11/09/ZJVXcw0uVl4ZXN32tS4UryyP1hA95ayn_150.png",
+  "26077700": "https://img.megabox.co.kr/SharedImg/2026/11/09/PGE49uk8q8CSZA4buPmvcxM22C0CRfpS_150.png",
+  "26077800": "https://img.megabox.co.kr/SharedImg/2026/11/09/EveT228NLyR68JhVxP4pSSSju1T2UIFN_150.jpg",
+  "26078000": "https://img.megabox.co.kr/SharedImg/2026/11/25/DN4bRwLiKRH4YjusNUZQjfB5gW4xTCLK_150.jpg",
+  "26078200": "https://img.megabox.co.kr/SharedImg/2026/11/17/7CUmK1QSKBkT4l3Y9CNjeC3W1cD9aTOi_150.jpg",
+  "26078300": "https://img.megabox.co.kr/SharedImg/2026/11/11/t8C56YWGgyrNLTkICYwZYzNpjTWcFbFp_150.jpg",
+  "26078500": "https://img.megabox.co.kr/SharedImg/2026/11/20/iBvNNcJRrNWKz4P1ap7XCuSh0BdStUdn_150.jpg",
+  "26078600": "https://img.megabox.co.kr/SharedImg/2026/11/13/4hbZ79i9H8uQ9rxyIJpBPg3VGGySBG45_150.jpg",
+  "26078800": "https://img.megabox.co.kr/SharedImg/2026/11/17/Lsfs4gBCY50DXlapVzj09RRwt2s0GWai_150.jpg",
+  "26078900": "https://img.megabox.co.kr/SharedImg/2026/11/17/p59oOxvB6tMzSrOIF96Hgw322zpc5eAW_150.png",
+  "26079200": "https://img.megabox.co.kr/SharedImg/2026/11/19/cguLQdvj776EkMlDYx8cXiySmiUuaVa0_150.jpg",
+  "26079300": "https://img.megabox.co.kr/SharedImg/2026/11/19/0hMd9oa4tHnK2WtwKxpGHe8Cj59R9sD2_150.jpg",
+  "26079400": "https://img.megabox.co.kr/SharedImg/2026/11/20/VRdB4pA8mtZveIhzXtKbHCF80CUMbY5V_150.jpg",
+  "26079500": "https://img.megabox.co.kr/SharedImg/2026/11/20/P7RoDWGarT3IOP1XVusImr1xCUmD37FK_150.jpg",
+  "26079600": "https://img.megabox.co.kr/SharedImg/2026/11/20/g58SoQxtTkQoD1pUWCXwSFvyg8MugVgz_150.jpg",
+  "26079700": "https://img.megabox.co.kr/SharedImg/2026/11/25/i6gopgbuWSoyRfxSPG5gVM6KUGCegWba_150.jpg",
+  "26079800": "https://img.megabox.co.kr/SharedImg/2026/11/25/Z7bD9Fxdu5jY0kYj7YxReebRV8KZPy71_150.jpg",
+  "26080000": "https://img.megabox.co.kr/SharedImg/2026/11/24/EnCOvf4PpeR1vqYRCLlJkyUXC1cfJe67_150.jpg",
+  "26080100": "https://img.megabox.co.kr/SharedImg/2026/11/24/jIvXf8U1DHQXeHpInZ1f82wwFygIT4mh_150.jpg",
+  "26080300": "https://img.megabox.co.kr/SharedImg/2026/11/25/IsVbvsvn3rh6tVMlzDyRi3gbeFI5Oo94_150.jpg",
+  "26080400": "https://img.megabox.co.kr/SharedImg/2026/11/25/MmxBs6Kbre0uRdZILHxTLoNgyJ1GOAoK_150.jpg",
+  "26080700": "https://img.megabox.co.kr/SharedImg/2026/11/27/5YmMlYgy73sR88AECk3TyBlBfsfg9QUc_150.png"
+ },
+ "started": true,
+ "tg_offset": 901760373,
+ "watch_seq": 1,
+ "watches": []
+}
